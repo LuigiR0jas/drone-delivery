@@ -1,0 +1,15 @@
+{
+  "name": "drone-delivery",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "https://github.com/LuigiR0jas/drone-delivery.git",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luigi Rojas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
