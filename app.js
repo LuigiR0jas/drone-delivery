@@ -12,8 +12,7 @@ function loadCoords(position) {
         });
     new google.maps.Marker({
             position: coords,
-            map: map,
-            animation: google.maps.Animation.BOUNCE
+            map: map
         });
     var latP = document.querySelector('#latP'),
         lngP = document.querySelector('#lngP'),
