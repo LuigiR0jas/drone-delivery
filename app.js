@@ -84,41 +84,42 @@ function loadCoords(position) {
         }
     })
 
-    google.maps.event.addListener(map, 'mousemove', function(event) {
-        latP.textContent = `·Drone starting latitude: ` + event.latLng.lat().toFixed(6);
-        lngP.textContent = `·Drone starting longitude: ` + event.latLng.lng().toFixed(6);
 
-        document.getElementById("clear").onclick = function() {
-            coord2Click.textContent = `·Chosen Coordenates: 0, 0`;
-            coord2Distance.textcontent = `·Distance: 0m`
-            latLl.textContent = `·Your latitude: 0`;
-            lngLl.textContent = `·Your longitude: 0`;
-            accLl.textContent = `·Accuracy: 0` + `m`;
-            circle.setMap(null);
-            marker.setMap(null);
-            secondMarker.setMap(null);
-            linePath.setMap(null);
-        };
-        document.getElementById("recharge").onclick = function() {
-            latLl.textContent = `·Your latitude: ${coords.lat.toFixed(6)}`;
-            lngLl.textContent = `·Your longitude: ${coords.lng.toFixed(6)}`;
-            accLl.textContent = `·Accuracy: ${coords.acc.toFixed(2)}` + `m`;
-            marker = new google.maps.Marker({
-                    position: coords,
-                    map: map
-                }),
-                circle = new google.maps.Circle({
-                    strokeColor: '#10568f',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#3a83da',
-                    fillOpacity: 0.35,
-                    center: coords,
-                    radius: coords.acc,
-                    map: map
-                });
-        }
-    });
+google.maps.event.addListener(map, 'mousemove', function(event) {
+    latP.textContent = `·Drone starting latitude: ` + event.latLng.lat().toFixed(6);
+    lngP.textContent = `·Drone starting longitude: ` + event.latLng.lng().toFixed(6);
+
+    document.getElementById("clear").onclick = function() {
+        coord2Click.textContent = `·Chosen Coordenates: 0, 0`;
+        coord2Distance.textcontent = `·Distance: 0m`
+        latLl.textContent = `·Your latitude: 0`;
+        lngLl.textContent = `·Your longitude: 0`;
+        accLl.textContent = `·Accuracy: 0` + `m`;
+        circle.setMap(null);
+        marker.setMap(null);
+        secondMarker.setMap(null);
+        linePath.setMap(null);
+    };
+    document.getElementById("recharge").onclick = function() {
+        latLl.textContent = `·Your latitude: ${coords.lat.toFixed(6)}`;
+        lngLl.textContent = `·Your longitude: ${coords.lng.toFixed(6)}`;
+        accLl.textContent = `·Accuracy: ${coords.acc.toFixed(2)}` + `m`;
+        marker = new google.maps.Marker({
+                position: coords,
+                map: map
+            }),
+            circle = new google.maps.Circle({
+                strokeColor: '#10568f',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#3a83da',
+                fillOpacity: 0.35,
+                center: coords,
+                radius: coords.acc,
+                map: map
+            });
+    }
+});
 
 };
 
