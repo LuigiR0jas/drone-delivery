@@ -10,7 +10,6 @@
   "author": "Luigi Rojas",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0",
-    "materialize-css": "^0.97.7"
+    "express": "^4.14.0"
   }
 }
