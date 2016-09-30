@@ -10,19 +10,21 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGVT2K8Qye-nVvqwr-bXsQUYvGLjYeFmA&callback=getCoords" defer async></script>
     <!-- Main JavaScript file -->
     <script src="app.js" defer async></script>
-    <img src="./drone.jpg" class="banner" />
+    <div>
+        <img src="./drone.jpg" class="banner" />
+    </div>
+
 
     <div id="mapD">
 
     </div>
-    <p id="latLl">
-    </p>
-    <p id="lngLl">
-    </p>
-    <p id="accLl">
-    </p>
-    <div>
-
+    <div class="coordText">
+        <p id="latLl">
+        </p>
+        <p id="lngLl">
+        </p>
+        <p id="accLl">
+        </p>
         <p id="latP">
         </p>
         <p id="lngP">
@@ -30,7 +32,6 @@
         <p id="coord2Click">
         </p>
         <p id="coord2Distance">
-
         </p>
         <button id="clear">Clear map</button>
         <button id="recharge">Load Again</button>

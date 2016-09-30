@@ -6,7 +6,7 @@ function loadCoords(position) {
     };
     var mapD = document.querySelector('#mapD'),
         map = new google.maps.Map(mapD, {
-            zoom: 19,
+            zoom: 18,
             center: coords
         }),
         marker = new google.maps.Marker({
@@ -49,9 +49,7 @@ function loadCoords(position) {
                 lng: coords2.lng
             }],
             distance = haversine(coords, coords2);
-        coord2Click.textContent = `·Chosen Coordenates: 0`;
         coord2Click.textContent = `·Chosen Coordenates: ${coords2.lat.toFixed(6)}, ${coords2.lng.toFixed(6)} `;
-        coord2Distance.textContent = `·Distance: 0`;
         coord2Distance.textContent = `·Distance: ${distance.toFixed(2)}m`;
         if (secondMarker !== null) {
             secondMarker.setMap(null);
@@ -91,17 +89,20 @@ function loadCoords(position) {
         lngP.textContent = `·Drone starting longitude: ` + event.latLng.lng().toFixed(6);
 
         document.getElementById("clear").onclick = function() {
-            circle.setMap(null);
-            marker.setMap(null);
-            secondMarker.setMap(null);
-            linePath.setMap(null);
             coord2Click.textContent = `·Chosen Coordenates: 0, 0`;
             coord2Distance.textcontent = `·Distance: 0m`
             latLl.textContent = `·Your latitude: 0`;
             lngLl.textContent = `·Your longitude: 0`;
             accLl.textContent = `·Accuracy: 0` + `m`;
+            circle.setMap(null);
+            marker.setMap(null);
+            secondMarker.setMap(null);
+            linePath.setMap(null);
         };
         document.getElementById("recharge").onclick = function() {
+            latLl.textContent = `·Your latitude: ${coords.lat.toFixed(6)}`;
+            lngLl.textContent = `·Your longitude: ${coords.lng.toFixed(6)}`;
+            accLl.textContent = `·Accuracy: ${coords.acc.toFixed(2)}` + `m`;
             marker = new google.maps.Marker({
                     position: coords,
                     map: map
