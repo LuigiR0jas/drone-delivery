@@ -92,7 +92,7 @@ google.maps.event.addListener(map, 'mousemove', function(event) {
     document.getElementById("clear").onclick = function() {
         coord2Click.textContent = `·Chosen Coordenates: 0, 0`;
         coord2Distance.textcontent = `·Distance: 0m`;
-        // latLl.textContent = `·Your latitude: 0`;
+        latLl.textContent = `·Your latitude: 0`;
         lngLl.textContent = `·Your longitude: 0`;
         accLl.textContent = `·Accuracy: 0` + `m`;
         circle.setMap(null);
@@ -139,7 +139,9 @@ function haversine(p1, p2) {
 };
 
 function failCoords() {
-    console.log('no internet');
+    var fail = true;
+    document.querySelector('#clear').disable;
+    document.querySelector('#recharge').disable;
 };
 
 function getCoords() {
