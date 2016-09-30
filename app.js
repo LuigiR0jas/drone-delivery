@@ -6,7 +6,7 @@ function loadCoords(position) {
     };
     var mapD = document.querySelector('#mapD'),
         map = new google.maps.Map(mapD, {
-            zoom: 14,
+            zoom: 19,
             center: coords
         }),
         marker = new google.maps.Marker({
@@ -32,9 +32,9 @@ function loadCoords(position) {
         coord2Distance = document.querySelector('#coord2Distance'),
         secondMarker = null,
         linePath = null;
-    latLl.textContent = `Your latitude: ${coords.lat.toFixed(6)}`;
-    lngLl.textContent = `Your longitude: ${coords.lng.toFixed(6)}`;
-    accLl.textContent = `Accuracy: ${coords.acc.toFixed(2)}` + `m`;
+    latLl.textContent = `·Your latitude: ${coords.lat.toFixed(6)}`;
+    lngLl.textContent = `·Your longitude: ${coords.lng.toFixed(6)}`;
+    accLl.textContent = `·Accuracy: ${coords.acc.toFixed(2)}` + `m`;
 
     google.maps.event.addListener(map, 'click', function(event) {
         var coords2 = {
@@ -49,8 +49,10 @@ function loadCoords(position) {
                 lng: coords2.lng
             }],
             distance = haversine(coords, coords2);
-        coord2Click.textContent = `Chosen Coordenates: ${coords2.lat.toFixed(6)}, ${coords2.lng.toFixed(6)} `;
-        coord2Distance.textContent = `Distance: ${distance.toFixed(2)}m`;
+        coord2Click.textContent = `·Chosen Coordenates: 0`;
+        coord2Click.textContent = `·Chosen Coordenates: ${coords2.lat.toFixed(6)}, ${coords2.lng.toFixed(6)} `;
+        coord2Distance.textContent = `·Distance: 0`;
+        coord2Distance.textContent = `·Distance: ${distance.toFixed(2)}m`;
         if (secondMarker !== null) {
             secondMarker.setMap(null);
             linePath.setMap(null);
@@ -85,16 +87,45 @@ function loadCoords(position) {
     })
 
     google.maps.event.addListener(map, 'mousemove', function(event) {
-        latP.textContent = `Drone starting latitude: ` + event.latLng.lat().toFixed(6);
-        lngP.textContent = `Drone starting longitude: ` + event.latLng.lng().toFixed(6);
+        latP.textContent = `·Drone starting latitude: ` + event.latLng.lat().toFixed(6);
+        lngP.textContent = `·Drone starting longitude: ` + event.latLng.lng().toFixed(6);
+
+        document.getElementById("clear").onclick = function() {
+            circle.setMap(null);
+            marker.setMap(null);
+            secondMarker.setMap(null);
+            linePath.setMap(null);
+            coord2Click.textContent = `·Chosen Coordenates: 0, 0`;
+            coord2Distance.textcontent = `·Distance: 0m`
+            latLl.textContent = `·Your latitude: 0`;
+            lngLl.textContent = `·Your longitude: 0`;
+            accLl.textContent = `·Accuracy: 0` + `m`;
+        };
+        document.getElementById("recharge").onclick = function() {
+            marker = new google.maps.Marker({
+                    position: coords,
+                    map: map
+                }),
+                circle = new google.maps.Circle({
+                    strokeColor: '#10568f',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#3a83da',
+                    fillOpacity: 0.35,
+                    center: coords,
+                    radius: coords.acc,
+                    map: map
+                });
+        }
     });
+
 };
 
 function haversine(p1, p2) {
     var rad = function(x) {
         return x * Math.PI / 180;
     };
-    var R = 6378137; //Earth’s mean radius in meter
+    var R = 6378137;
     var dLat = rad(p2.lat - p1.lat);
     var dLong = rad(p2.lng - p1.lng);
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -102,7 +133,7 @@ function haversine(p1, p2) {
         Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    return d; //returns the distance in meter
+    return d;
 };
 
 function failCoords() {
